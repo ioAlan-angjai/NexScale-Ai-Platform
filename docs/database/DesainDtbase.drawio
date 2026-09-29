@@ -1,0 +1,464 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="-BYA05t81M5e-WN-wc0D">
+    <mxGraphModel dx="4102" dy="1934" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iAkWYV90X1ENxs32HtNI-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="User" vertex="1">
+          <mxGeometry height="200" width="240" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-2" parent="iAkWYV90X1ENxs32HtNI-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&amp;nbsp;user_id : UUID&amp;nbsp;&lt;br&gt;&amp;nbsp;email : VARCHAR(255)&amp;nbsp;&lt;br&gt;&amp;nbsp;password_hash : VARCHAR(255)&amp;nbsp;&lt;br&gt;&amp;nbsp;role : VARCHAR(20)&amp;nbsp;&lt;br&gt;&amp;nbsp;full_name : VARCHAR(150)&amp;nbsp;&lt;br&gt;&amp;nbsp;avatar_url : TEXT&amp;nbsp;&lt;br&gt;&amp;nbsp;is_verified : BOOLEAN&lt;br&gt;&amp;nbsp;created_at : TIMESTAMP&lt;br&gt;&amp;nbsp;updated_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="30" width="230" x="50" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-3" parent="iAkWYV90X1ENxs32HtNI-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="PK" vertex="1">
+          <mxGeometry height="30" width="60" x="-10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-5" parent="1" style="text;whiteSpace=wrap;html=1;" value="CONSTRAINT&amp;nbsp;&lt;br&gt;• PK: user_id&amp;nbsp;&lt;br&gt;• UQ: email&amp;nbsp;&lt;br&gt;• CHECK: role IN&amp;nbsp;&lt;br&gt;(&#39;CLIENT&#39;,&#39;PROVIDER&#39;,&#39;ADMIN&#39;)" vertex="1">
+          <mxGeometry height="100" width="220" x="50" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-6" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="40" y="360" as="sourcePoint" />
+            <mxPoint x="260" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-7" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="40" y="360" as="sourcePoint" />
+            <mxPoint x="280" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-8" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="360" as="sourcePoint" />
+            <mxPoint x="260" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-9" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Client_rofile" vertex="1">
+          <mxGeometry height="210" width="260" x="380" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-16" parent="iAkWYV90X1ENxs32HtNI-9" style="text;whiteSpace=wrap;html=1;" value="PK  client_id : UUID&amp;nbsp;&lt;br&gt;FK  user_id : UUID&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; company_name : VARCHAR(200)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; business_type : VARCHAR(100)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; industry : VARCHAR(100)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;description : TEXT&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;location : VARCHAR(150&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;website : TEXT&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;created_at : TIMESTAMP&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;updated_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="170" width="240" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-17" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-1" style="endArrow=none;html=1;rounded=0;exitX=1.003;exitY=0.09;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="470" y="260" as="sourcePoint" />
+            <mxPoint x="380" y="78" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-19" connectable="0" parent="iAkWYV90X1ENxs32HtNI-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:1" vertex="1">
+          <mxGeometry relative="1" x="-0.0287" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-20" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Provider_Profile" vertex="1">
+          <mxGeometry height="225" width="260" x="-290" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-22" parent="iAkWYV90X1ENxs32HtNI-20" style="text;whiteSpace=wrap;html=1;" value="PK  provider_id : UUID&amp;nbsp;&lt;div&gt;FK  user_id : UUID&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; provider_type : VARCHAR(50)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; company_name : VARCHAR(200)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; bio : TEXT&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; location : VARCHAR(150)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; experience_years : INTEGER&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; availability_status : VARCHAR&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; verification_status : VARCHAR&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; rating : DECIMAL(3,2)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; created_at : TIMESTAMP&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; updated_at : TIMESTAMP&lt;/div&gt;" vertex="1">
+          <mxGeometry height="200" width="240" x="10" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-23" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;entryX=-0.004;entryY=0.083;entryDx=0;entryDy=0;entryPerimeter=0;" target="iAkWYV90X1ENxs32HtNI-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-30" y="76.6" as="sourcePoint" />
+            <mxPoint x="130" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-24" connectable="0" parent="iAkWYV90X1ENxs32HtNI-23" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:1" vertex="1">
+          <mxGeometry relative="1" x="-0.0263" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-25" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Project" vertex="1">
+          <mxGeometry height="225" width="260" x="20" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-27" parent="iAkWYV90X1ENxs32HtNI-25" style="text;whiteSpace=wrap;html=1;" value="PK&amp;nbsp;&amp;nbsp;&amp;nbsp;project_id : UUID&amp;nbsp;&lt;div&gt;FK&amp;nbsp; &amp;nbsp;client_id : UUID&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;FK  category_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;title : VARCHAR(200)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;description : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;budget_min : DECIMAL(15,2)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;budget_max : DECIMAL(15,2)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;duration_estimate : INTEGER&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;status : VARCHAR(30)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;deadline : DATE&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;created_at : TIMESTAMP&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;updated_at : TIMESTAMP&lt;/div&gt;" vertex="1">
+          <mxGeometry height="200" width="220" x="20" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-28" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Category" vertex="1">
+          <mxGeometry height="110" width="200" x="-290" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-29" parent="iAkWYV90X1ENxs32HtNI-28" style="text;whiteSpace=wrap;html=1;" value="PK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt; category_id : UUID&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;name : VARCHAR(100)&amp;nbsp;│ &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;description : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;created_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="80" width="180" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-30" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-28" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-25" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-190" y="710" />
+            </Array>
+            <mxPoint x="-160" y="760" as="sourcePoint" />
+            <mxPoint x="-110" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-31" connectable="0" parent="iAkWYV90X1ENxs32HtNI-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.3455" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-32" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-25" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-16" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="596.25" />
+            </Array>
+            <mxPoint x="410" y="450" as="sourcePoint" />
+            <mxPoint x="460" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-33" connectable="0" parent="iAkWYV90X1ENxs32HtNI-32" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.588" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-34" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Project_Requirement" vertex="1">
+          <mxGeometry height="200" width="230" x="460" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-35" parent="iAkWYV90X1ENxs32HtNI-34" style="text;whiteSpace=wrap;html=1;" value="PK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt; requirement_id : UUID&amp;nbsp;&lt;br&gt;FK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt; project_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;functional_requirements : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;technical_requirements : TEXT│&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;ai_summary : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;estimated_duration : INTEGER&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;estimated_budget : DECIMAL&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;created_at : TIMESTAMP&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;updated_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="170" width="220" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-36" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-25" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="iAkWYV90X1ENxs32HtNI-34" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="575" y="710" />
+            </Array>
+            <mxPoint x="320" y="770" as="sourcePoint" />
+            <mxPoint x="370" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-37" connectable="0" parent="iAkWYV90X1ENxs32HtNI-36" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:1" vertex="1">
+          <mxGeometry relative="1" x="-0.2934" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-38" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Skills" vertex="1">
+          <mxGeometry height="115" width="210" x="1050" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-39" parent="iAkWYV90X1ENxs32HtNI-38" style="text;whiteSpace=wrap;html=1;" value="PK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;skill_id : UUID&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;name : VARCHAR(100)&amp;nbsp;&lt;div&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;description : TEXT&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-42" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-25" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="700" as="sourcePoint" />
+            <mxPoint x="970" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-43" connectable="0" parent="iAkWYV90X1ENxs32HtNI-42" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.0264" y="4" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-44" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-38" style="endArrow=none;html=1;rounded=0;entryX=0.952;entryY=0.243;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="1155" y="650" />
+            </Array>
+            <mxPoint x="1040" y="760" as="sourcePoint" />
+            <mxPoint x="969.9199999999992" y="650.0099999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-46" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Providers_Skills" vertex="1">
+          <mxGeometry height="110" width="210" x="1250" y="-20" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-47" parent="iAkWYV90X1ENxs32HtNI-46" style="text;whiteSpace=wrap;html=1;" value="PK/FK provider_id : UUID&amp;nbsp;&lt;br&gt;PK/FK skill_id : UUID&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp;proficiency : VARCHAR(30)&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;years_experience : INTEGER" vertex="1">
+          <mxGeometry height="80" width="200" x="5" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-48" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-39" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-47" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="1355" y="890" />
+            </Array>
+            <mxPoint x="1260" y="580" as="sourcePoint" />
+            <mxPoint x="1310" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-49" connectable="0" parent="iAkWYV90X1ENxs32HtNI-48" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.1315" y="6" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-50" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-20" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-46" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-160" y="-160" />
+              <mxPoint x="1355" y="-160" />
+            </Array>
+            <mxPoint x="640" y="230" as="sourcePoint" />
+            <mxPoint x="690" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-51" connectable="0" parent="iAkWYV90X1ENxs32HtNI-50" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.0426" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-52" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Portfolio" vertex="1">
+          <mxGeometry height="200" width="200" x="-910" y="-160" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-53" parent="iAkWYV90X1ENxs32HtNI-52" style="text;whiteSpace=wrap;html=1;" value="PK&amp;nbsp; &amp;nbsp;portfolio_id : UUID&amp;nbsp;&lt;br&gt;FK&amp;nbsp; &amp;nbsp;provider_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;title : VARCHAR(200)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;description : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;project_url : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;image_url : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;created_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="120" width="180" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-54" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-52" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-20" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-560" y="-60" />
+              <mxPoint x="-560" y="116.25" />
+            </Array>
+            <mxPoint x="-450" y="70" as="sourcePoint" />
+            <mxPoint x="-400" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-55" connectable="0" parent="iAkWYV90X1ENxs32HtNI-54" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.536" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-56" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Experience" vertex="1">
+          <mxGeometry height="180" width="260" x="-900" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-57" parent="iAkWYV90X1ENxs32HtNI-56" style="text;whiteSpace=wrap;html=1;" value="PK&amp;nbsp; &amp;nbsp;experience_id : UUID&amp;nbsp;&lt;br&gt;FK&amp;nbsp; &amp;nbsp;provider_id : UUID&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;company_name : VARCHAR(200)&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;position : VARCHAR(150)&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;description : TEXT&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;start_date : DATE&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;end_date : DATE&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;is_current : BOOLEAN" vertex="1">
+          <mxGeometry height="140" width="240" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-58" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-56" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-20" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-770" y="230" />
+            </Array>
+            <mxPoint x="-790" y="320" as="sourcePoint" />
+            <mxPoint x="-740" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-59" connectable="0" parent="iAkWYV90X1ENxs32HtNI-58" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.2613" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-60" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Recommendation" vertex="1">
+          <mxGeometry height="120" width="240" x="31" y="1280" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-61" parent="iAkWYV90X1ENxs32HtNI-60" style="text;whiteSpace=wrap;html=1;" value="PK&amp;nbsp; &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;recommendation_id : UUID&amp;nbsp;&lt;br&gt;FK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt; project_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;generated_at : TIMESTAMP&amp;nbsp;&lt;br&gt;&amp;nbsp;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;algorithm_version : VARCHAR(50)&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp;status : VARCHAR(30)" vertex="1">
+          <mxGeometry height="100" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-62" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-60" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-27" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="240" y="1220" as="sourcePoint" />
+            <mxPoint x="290" y="1170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-63" connectable="0" parent="iAkWYV90X1ENxs32HtNI-62" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.0004" y="8" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-68" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Recomemendation_Item" vertex="1">
+          <mxGeometry height="200" width="245" x="-610" y="1236" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-69" parent="iAkWYV90X1ENxs32HtNI-68" style="text;whiteSpace=wrap;html=1;" value="PK&amp;nbsp; &amp;nbsp; recommendation_item_id : UUID&amp;nbsp;&lt;br&gt;FK&amp;nbsp; &amp;nbsp; recommendation_id : UUID&amp;nbsp;&lt;br&gt;FK&amp;nbsp; &amp;nbsp; provider_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;match_score : DECIMAL(5,2)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;skill_score : DECIMAL(5,2)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;explanation : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;ranking : INTEGER" vertex="1">
+          <mxGeometry height="170" width="240" x="15" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-70" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-68" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-61" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-20" y="1240" as="sourcePoint" />
+            <mxPoint x="30" y="1190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-71" connectable="0" parent="iAkWYV90X1ENxs32HtNI-70" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.0091" y="4" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-72" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-68" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-22" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-487.5" y="440" />
+              <mxPoint x="-160" y="440" />
+            </Array>
+            <mxPoint x="-120" y="820" as="sourcePoint" />
+            <mxPoint x="-70" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-73" connectable="0" parent="iAkWYV90X1ENxs32HtNI-72" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.3771" y="5" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-74" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Proposal" vertex="1">
+          <mxGeometry height="200" width="240" x="-1160" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-75" parent="iAkWYV90X1ENxs32HtNI-74" style="text;whiteSpace=wrap;html=1;" value="PK&amp;nbsp; &amp;nbsp;proposal_id : UUID&amp;nbsp;&lt;br&gt;FK&amp;nbsp; &amp;nbsp;project_id : UUID&amp;nbsp;&lt;br&gt;FK&amp;nbsp; &amp;nbsp;provider_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;cover_letter : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;proposed_price : DECIMAL(15,2)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;estimated_duration : INTEGER&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;status : VARCHAR(30)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;submitted_at : TIMESTAMP&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;updated_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="150" width="230" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-76" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-75" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-25" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-540" y="795" />
+              <mxPoint x="-540" y="600" />
+            </Array>
+            <mxPoint x="-620" y="690" as="sourcePoint" />
+            <mxPoint x="-570" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-77" connectable="0" parent="iAkWYV90X1ENxs32HtNI-76" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.1513" y="4" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-78" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-74" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-20" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1040" y="172.5" />
+            </Array>
+            <mxPoint x="-680" y="480" as="sourcePoint" />
+            <mxPoint x="-630" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-79" connectable="0" parent="iAkWYV90X1ENxs32HtNI-78" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.4057" y="1" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-80" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Deal" vertex="1">
+          <mxGeometry height="210" width="230" x="-1550" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-81" parent="iAkWYV90X1ENxs32HtNI-80" style="text;whiteSpace=wrap;html=1;" value="deal_id PK&amp;nbsp;&lt;div&gt;proposal_id FK&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;UNIQUE&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;agreed_price&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;status&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;start_date&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;end_date&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;created_at&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;updated_at&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="220" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-82" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-74" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-81" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1430" y="790" />
+            </Array>
+            <mxPoint x="-1150" y="670" as="sourcePoint" />
+            <mxPoint x="-1100" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-83" connectable="0" parent="iAkWYV90X1ENxs32HtNI-82" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:1" vertex="1">
+          <mxGeometry relative="1" x="-0.4545" y="-8" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-84" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Payment" vertex="1">
+          <mxGeometry height="180" width="260" x="-1565" y="-170" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-85" parent="iAkWYV90X1ENxs32HtNI-84" style="text;whiteSpace=wrap;html=1;" value="PK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;payment_id : UUID&amp;nbsp;&lt;br&gt;FK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;deal_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;amount : DECIMAL(15,2)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;payment_type : VARCHAR(30)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;payment_method : VARCHAR(50)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;status : VARCHAR(30)&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;transaction_reference : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;paid_at : TIMESTAMP&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;created_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="150" width="240" x="20" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-86" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-80" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-84" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-1310" y="240" as="sourcePoint" />
+            <mxPoint x="-1260" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-87" connectable="0" parent="iAkWYV90X1ENxs32HtNI-86" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.0121" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-88" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Conversation" vertex="1">
+          <mxGeometry height="130" width="200" x="-2090" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-89" parent="iAkWYV90X1ENxs32HtNI-88" style="text;whiteSpace=wrap;html=1;" value="conversation_id PK&lt;br/&gt;project_id FK&lt;br/&gt;client_id FK&lt;br/&gt;provider_id FK&lt;br/&gt;created_at&lt;br/&gt;updated_at" vertex="1">
+          <mxGeometry height="80" width="190" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-92" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Messages" vertex="1">
+          <mxGeometry height="200" width="210" x="-1200" y="-480" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-93" parent="iAkWYV90X1ENxs32HtNI-92" style="text;whiteSpace=wrap;html=1;" value="PK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;message_id : UUID&amp;nbsp;&lt;br&gt;FK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;conversation_id : UUID&amp;nbsp;&lt;br&gt;FK &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;sender_id : UUID&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;message_text : TEXT&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;is_read : BOOLEAN&amp;nbsp;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;sent_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="120" width="200" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-94" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-88" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-92" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1990" y="-380" />
+            </Array>
+            <mxPoint x="-1530" y="-10" as="sourcePoint" />
+            <mxPoint x="-1480" y="-60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-95" connectable="0" parent="iAkWYV90X1ENxs32HtNI-94" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.4693" y="6" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-96" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-93" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="-390" />
+            </Array>
+            <mxPoint x="-420" y="-10" as="sourcePoint" />
+            <mxPoint x="-370" y="-60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-97" connectable="0" parent="iAkWYV90X1ENxs32HtNI-96" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.2833" y="7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-98" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Review" vertex="1">
+          <mxGeometry height="200" width="200" x="-640" y="-980" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-99" parent="iAkWYV90X1ENxs32HtNI-98" style="text;whiteSpace=wrap;html=1;" value="review_id PK&lt;br/&gt;deal_id FK&lt;br/&gt;reviewer_id FK&lt;br/&gt;reviewee_id FK&lt;br/&gt;rating&lt;br/&gt;comment&lt;br/&gt;created_at" vertex="1">
+          <mxGeometry height="120" width="180" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-100" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-80" style="endArrow=none;html=1;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-98" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1492.5" y="170" />
+              <mxPoint x="-1710" y="170" />
+              <mxPoint x="-1710" y="-880" />
+            </Array>
+            <mxPoint x="-1180" y="-190" as="sourcePoint" />
+            <mxPoint x="-1130" y="-240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-101" connectable="0" parent="iAkWYV90X1ENxs32HtNI-100" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.5746" y="-4" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-102" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-98" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="-880" />
+            </Array>
+            <mxPoint x="100" y="-420" as="sourcePoint" />
+            <mxPoint x="150" y="-470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-103" connectable="0" parent="iAkWYV90X1ENxs32HtNI-102" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1;n" vertex="1">
+          <mxGeometry relative="1" x="-0.5854" y="2" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-104" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-20" style="endArrow=none;html=1;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-98" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-225" y="-130" />
+              <mxPoint x="-540" y="-130" />
+            </Array>
+            <mxPoint x="-230" y="-110" as="sourcePoint" />
+            <mxPoint x="-180" y="-160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iAkWYV90X1ENxs32HtNI-105" connectable="0" parent="iAkWYV90X1ENxs32HtNI-104" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.3981" y="-3" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="H1kS4MNRCIsc1OMaR5fb-2" edge="1" parent="1" source="iAkWYV90X1ENxs32HtNI-88" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="iAkWYV90X1ENxs32HtNI-25" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1990" y="1100" />
+              <mxPoint x="-410" y="1090" />
+              <mxPoint x="-410" y="650" />
+            </Array>
+            <mxPoint x="-1410" y="750" as="sourcePoint" />
+            <mxPoint x="-1360" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="H1kS4MNRCIsc1OMaR5fb-3" connectable="0" parent="H1kS4MNRCIsc1OMaR5fb-2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.0846" y="-14" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
