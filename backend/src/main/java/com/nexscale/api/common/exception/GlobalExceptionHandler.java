@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.util.stream.Collectors;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+
 
 
 import java.time.Instant;
@@ -77,5 +79,22 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST.value(), "Validasi Gagal", message, Instant.now().toString());
                 return 
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+
+        /**
+         * Menangani request body yang tidak terbaca, seperti JSON rusak
+         * atau nilai enum yang tidak dikenal (400 Bad Request)
+         */
+
+        @ExceptionHandler(HttpMessageNotReadableException.class)
+        public ResponseEntity<ErrorResponse>handleMessageNotReadable(
+                HttpMessageNotReadableException ex) {
+                ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), 
+                "Format Request Tidak Valid",
+                "Format JSON atau tipe data pada request body tidak valid",
+                
+                Instant.now().toString() );
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+
         }
 }
