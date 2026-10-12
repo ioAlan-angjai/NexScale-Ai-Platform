@@ -113,4 +113,20 @@ public class GlobalExceptionHandler {
                 Instant.now().toString());
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
         }
+
+        /**
+         * Menangani kredensial login yang salah (401 Unauthorized)
+         */
+
+        @ExceptionHandler(InvalidCredentialsException.class)
+        public ResponseEntity<ErrorResponse>handleInvalidCredentials(InvalidCredentialsException ex) {
+                ErrorResponse error = new ErrorResponse(
+                    HttpStatus.UNAUTHORIZED.value(),
+                    "Autentikasi gagal",
+                    ex.getMessage(),
+                    Instant.now().toString()
+                );
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+
+        }
 }

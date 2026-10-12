@@ -28,3 +28,8 @@ logging:
   level:
     root: INFO
     com.nexscale.api: DEBUG
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY:rahasia-kunci-jwt-nexscale-ai-minimal-32-karakter-keamanan-tinggi}
+    expiration-ms: ${JWT_EXPIRATION_MS:3600000}
