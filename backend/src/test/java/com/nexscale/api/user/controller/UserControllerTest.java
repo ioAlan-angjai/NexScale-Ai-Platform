@@ -3,14 +3,17 @@ package com.nexscale.api.user.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nexscale.api.common.exception.DuplicateResourceException;
 import com.nexscale.api.common.exception.GlobalExceptionHandler;
+import com.nexscale.api.common.exception.RoleNotAllowedException;
 import com.nexscale.api.user.dto.RegisterRequest;
 import com.nexscale.api.user.dto.UserResponse;
 import com.nexscale.api.user.entity.Role;
 import com.nexscale.api.user.service.UserService;
+import com.nexscale.api.common.config.SecurityConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {UserController.class, GlobalExceptionHandler.class})
+@Import(SecurityConfig.class)
 class UserControllerTest {
 
     @Autowired
@@ -92,6 +96,28 @@ class UserControllerTest {
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.status", is(409)))
                 .andExpect(jsonPath("$.message", is("Email sudah terdaftar: existing@example.com")));
+    }
+
+    @Test
+    @DisplayName("POST /api/users dengan role ADMIN ditolak dan mengembalikan 403 Forbidden")
+    void registerUser_roleAdmin_returnForbidden() throws Exception {
+        RegisterRequest request = new RegisterRequest(
+                "admin@example.com",
+                "password123",
+                Role.ADMIN,
+                "Admin User"
+        );
+
+        when(userService.registerUser(any(RegisterRequest.class)))
+                .thenThrow(new RoleNotAllowedException("Registrasi publik untuk role ADMIN tidak diizinkan"));
+
+        mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.status", is(403)))
+                .andExpect(jsonPath("$.error", is("Akses Ditolak")))
+                .andExpect(jsonPath("$.message", is("Registrasi publik untuk role ADMIN tidak diizinkan")));
     }
 
     @Test

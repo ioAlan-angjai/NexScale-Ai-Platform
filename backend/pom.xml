@@ -58,10 +58,23 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Flyway: database migration untuk PostgreSQL -->
+           <!-- Flyway: database migration untuk PostgreSQL -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+
+        <!-- Spring Security: Enkripsi Password (BCrypt) dan Filter Keamanan -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Spring Security Test: Membantu pengujian endpoint berkeamanan -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

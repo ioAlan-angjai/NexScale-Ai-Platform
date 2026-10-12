@@ -1,10 +1,13 @@
 package com.nexscale.api.health.controller;
 
+import com.nexscale.api.common.config.SecurityConfig;
 import com.nexscale.api.common.exception.GlobalExceptionHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
@@ -22,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     HealthController.class,
     GlobalExceptionHandler.class
 })
+@Import(SecurityConfig.class)
 class HealthControllerTest {
 
     @Autowired
@@ -39,6 +43,7 @@ class HealthControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("GET endpoint yang tidak ada harus mengembalikan 404 dalam format JSON")
     void unknownEndpoint_return404AsJson() throws Exception {
         mockMvc.perform(get("/api/tidak-ada"))

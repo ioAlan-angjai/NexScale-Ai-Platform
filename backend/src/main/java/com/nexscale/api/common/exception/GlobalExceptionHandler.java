@@ -96,5 +96,21 @@ public class GlobalExceptionHandler {
                 Instant.now().toString() );
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 
+
+        }
+
+        /**
+         * Menangani pendaftaran role terlarang seperti admin secara publik (403 Forbidden)
+         */
+
+        @ExceptionHandler(RoleNotAllowedException.class)
+        public ResponseEntity<ErrorResponse>handleRoleNotAllowed(RoleNotAllowedException ex) {
+                ErrorResponse error = new ErrorResponse(
+                        HttpStatus.FORBIDDEN.value(),
+                        "Akses Ditolak",
+                        ex.getMessage(),
+
+                Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
         }
 }
