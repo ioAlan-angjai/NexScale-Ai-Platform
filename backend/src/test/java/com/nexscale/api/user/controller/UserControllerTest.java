@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -88,5 +89,25 @@ class UserControllerTest {
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.status", is(409)))
                 .andExpect(jsonPath("$.message", is("Email sudah terdaftar: existing@example.com")));
+    }
+
+    @Test
+    @DisplayName("POST /api/users dengan email kosong mengembalikan 400 dan service tidak dipanggil")
+    void registerUser_blankEmail_returnBadRequestAndServiceNotCalled() throws Exception {
+        // Semua field valid KECUALI email, agar penyebab 400 hanya satu: email kosong
+        RegisterRequest request = new RegisterRequest(
+                "",
+                "password123",
+                Role.CLIENT,
+                "Tio Alan"
+        );
+
+        mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest());
+
+        // Input yang tidak valid tidak boleh sampai ke lapisan service
+        verifyNoInteractions(userService);
     }
 }

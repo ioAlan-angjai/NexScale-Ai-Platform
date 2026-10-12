@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("api/users")
@@ -23,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> registerUser(@RequestBody RegisterRequest request){
+    public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody RegisterRequest request){
        //1. Delegasikan proses bisnis ke user Service
        UserResponse response = userService.registerUser(request);
        //2. Kembalikan HTTP status 201 Created beserta data UserResponse di body 
