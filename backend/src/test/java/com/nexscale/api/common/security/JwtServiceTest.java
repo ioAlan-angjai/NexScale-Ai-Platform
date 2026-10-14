@@ -35,14 +35,16 @@ class JwtServiceTest {
         assertNotNull(token);
         assertFalse(token.isBlank());
 
-        // Verifikasi subject (email)
-        assertEquals("developer@nexscale.com", jwtService.extractEmail(token));
+        // Verifikasi subject berisi UUID userId
+        assertEquals(testUser.getUserId(), jwtService.extractUserId(token));
 
-        // Verifikasi claims tambahan
+        // Verifikasi custom claim role
+        assertEquals("CLIENT", jwtService.extractRole(token));
+
+        // Verifikasi TIDAK ada claim fullName dan userId terpisah
         Claims claims = jwtService.extractClaims(token);
-        assertEquals(testUser.getUserId().toString(), claims.get("userId", String.class));
-        assertEquals("CLIENT", claims.get("role", String.class));
-        assertEquals("Developer NexScale", claims.get("fullName", String.class));
+        assertNull(claims.get("fullName"));
+        assertNull(claims.get("userId"));
 
         // Verifikasi validitas token
         assertTrue(jwtService.isTokenValid(token));

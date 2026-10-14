@@ -59,7 +59,7 @@ class AuthServiceTest {
         assertNotNull(response);
         assertEquals("mocked.jwt.token", response.getAccessToken());
         assertEquals("Bearer", response.getTokenType());
-        assertEquals(3600000L, response.getExpiresIn());
+        assertEquals(3600L, response.getExpiresIn());
         assertEquals(dummyUser.getUserId(), response.getUserId());
         assertEquals("client@nexscale.com", response.getEmail());
         assertEquals(Role.CLIENT, response.getRole());

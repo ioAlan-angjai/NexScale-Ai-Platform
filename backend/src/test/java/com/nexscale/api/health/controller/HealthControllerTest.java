@@ -2,12 +2,16 @@ package com.nexscale.api.health.controller;
 
 import com.nexscale.api.common.config.SecurityConfig;
 import com.nexscale.api.common.exception.GlobalExceptionHandler;
+import com.nexscale.api.common.security.CustomAccessDeniedHandler;
+import com.nexscale.api.common.security.CustomAuthenticationEntryPoint;
+import com.nexscale.api.common.security.JwtService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
@@ -30,6 +34,16 @@ class HealthControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    // Mock dependensi SecurityConfig
+    @MockitoBean
+    private JwtService jwtService;
+
+    @MockitoBean
+    private CustomAuthenticationEntryPoint authenticationEntryPoint;
+
+    @MockitoBean
+    private CustomAccessDeniedHandler accessDeniedHandler;
 
     @Test
     @DisplayName("GET /api/health harus mengembalikan 200 OK dengan status UP")

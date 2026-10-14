@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nexscale.api.common.exception.DuplicateResourceException;
 import com.nexscale.api.common.exception.GlobalExceptionHandler;
 import com.nexscale.api.common.exception.RoleNotAllowedException;
+import com.nexscale.api.common.security.CustomAccessDeniedHandler;
+import com.nexscale.api.common.security.CustomAuthenticationEntryPoint;
+import com.nexscale.api.common.security.JwtService;
 import com.nexscale.api.user.dto.RegisterRequest;
 import com.nexscale.api.user.dto.UserResponse;
 import com.nexscale.api.user.entity.Role;
@@ -45,6 +48,16 @@ class UserControllerTest {
     // Memalsukan (Mock) UserService agar test fokus pada Controller layer saja
     @MockitoBean
     private UserService userService;
+
+    // Mock dependensi SecurityConfig
+    @MockitoBean
+    private JwtService jwtService;
+
+    @MockitoBean
+    private CustomAuthenticationEntryPoint authenticationEntryPoint;
+
+    @MockitoBean
+    private CustomAccessDeniedHandler accessDeniedHandler;
 
     @Test
     @DisplayName("POST /api/users berhasil mengembalikan 201 Created")

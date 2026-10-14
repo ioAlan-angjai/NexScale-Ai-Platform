@@ -46,7 +46,7 @@ public class AuthService {
         // 4. Return DTO response
         return new LoginResponse(
                 accessToken,
-                expirationMs,
+                expirationMs / 1000,
                 user.getUserId(),
                 user.getEmail(),
                 user.getRole(),
