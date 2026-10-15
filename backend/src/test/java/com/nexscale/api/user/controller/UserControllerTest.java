@@ -3,6 +3,7 @@ package com.nexscale.api.user.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nexscale.api.common.exception.DuplicateResourceException;
 import com.nexscale.api.common.exception.GlobalExceptionHandler;
+import com.nexscale.api.common.exception.ResourceNotFoundException;
 import com.nexscale.api.common.exception.RoleNotAllowedException;
 import com.nexscale.api.common.security.CustomAccessDeniedHandler;
 import com.nexscale.api.common.security.CustomAuthenticationEntryPoint;
@@ -28,8 +29,10 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -261,6 +264,69 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.error", is("Validasi Gagal")))
                 .andExpect(jsonPath("$.message", containsString(expectedFieldInMessage)));
 
+        verifyNoInteractions(userService);
+    }
+
+    @Test
+    @DisplayName("GET /api/users/me dengan token valid berhasil mengembalikan 200 OK dan profil user")
+    void getCurrentUser_authenticated_returnsOkWithUserData() throws Exception {
+        UUID mockUserId = UUID.randomUUID();
+        String token = "valid.jwt.token";
+
+        UserResponse mockResponse = new UserResponse(
+                mockUserId,
+                "client@nexscale.com",
+                Role.CLIENT,
+                "Client User",
+                null,
+                false,
+                Instant.now()
+        );
+
+        when(jwtService.isTokenValid(token)).thenReturn(true);
+        when(jwtService.extractUserId(token)).thenReturn(mockUserId);
+        when(jwtService.extractRole(token)).thenReturn("CLIENT");
+        when(userService.getUserById(mockUserId)).thenReturn(mockResponse);
+
+        mockMvc.perform(get("/api/users/me")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.userId", is(mockUserId.toString())))
+                .andExpect(jsonPath("$.email", is("client@nexscale.com")))
+                .andExpect(jsonPath("$.role", is("CLIENT")))
+                .andExpect(jsonPath("$.fullName", is("Client User")))
+                // Verifikasi kritis: memastikan field password sama sekali tidak ada di JSON response
+                .andExpect(jsonPath("$.password").doesNotExist())
+                .andExpect(jsonPath("$.passwordHash").doesNotExist());
+    }
+
+    @Test
+    @DisplayName("GET /api/users/me ketika user tidak ada di database mengembalikan 404 Not Found")
+    void getCurrentUser_userNotFound_returnsNotFound() throws Exception {
+        UUID mockUserId = UUID.randomUUID();
+        String token = "valid.jwt.token";
+
+        when(jwtService.isTokenValid(token)).thenReturn(true);
+        when(jwtService.extractUserId(token)).thenReturn(mockUserId);
+        when(jwtService.extractRole(token)).thenReturn("CLIENT");
+        when(userService.getUserById(mockUserId))
+                .thenThrow(new ResourceNotFoundException("Pengguna tidak ditemukan"));
+
+        mockMvc.perform(get("/api/users/me")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", is(404)))
+                .andExpect(jsonPath("$.error", is("Data Tidak Ditemukan")))
+                .andExpect(jsonPath("$.message", is("Pengguna tidak ditemukan")));
+    }
+
+    @Test
+    @DisplayName("GET /api/users/me tanpa token memicu authentication entry point (401)")
+    void getCurrentUser_unauthenticated_triggersAuthenticationEntryPoint() throws Exception {
+        mockMvc.perform(get("/api/users/me"));
+
+        // Memastikan request tanpa token dicegat oleh filter keamanan dan tidak pernah sampai ke UserService
+        verify(authenticationEntryPoint).commence(any(), any(), any());
         verifyNoInteractions(userService);
     }
 }

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import java.util.UUID;
+
 import jakarta.validation.Valid;
 
 
@@ -31,4 +35,12 @@ public class UserController {
        //2. Kembalikan HTTP status 201 Created beserta data UserResponse di body 
        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponse>getCurrentUser(@AuthenticationPrincipal UUID currentUserId) {
+        //1. ambil data profil user dari UserService berdasarkan UUID yang didapat dari JWT
+        UserResponse response = userService.getUserById(currentUserId);
+        //2. Kembalikan respons HTTP 200 OK dengan payload UserResponse
+        return ResponseEntity.ok(response);
+}
 }

@@ -1,7 +1,9 @@
 package com.nexscale.api.user.service;
 
+import com.nexscale.api.common.exception.ResourceNotFoundException;
 import com.nexscale.api.common.exception.RoleNotAllowedException;
 import com.nexscale.api.user.dto.RegisterRequest;
+import com.nexscale.api.user.dto.UserResponse;
 import com.nexscale.api.user.entity.Role;
 import com.nexscale.api.user.entity.User;
 import com.nexscale.api.user.repository.UserRepository;
@@ -14,7 +16,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -102,5 +110,44 @@ class UserServiceTest {
         );
 
         verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    @DisplayName("getUserById dengan UUID yang terdaftar berhasil mengembalikan UserResponse yang sesuai tanpa field password")
+    void getUserById_userFound_returnsUserResponse() {
+        UUID userId = UUID.randomUUID();
+        User dummyUser = new User("client@example.com", "$2a$10$hashedPasswordContoh", Role.CLIENT, "Client User");
+        dummyUser.setUserId(userId);
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(dummyUser));
+
+        UserResponse response = userService.getUserById(userId);
+
+        assertNotNull(response);
+        assertEquals(userId, response.getUserId());
+        assertEquals("client@example.com", response.getEmail());
+        assertEquals(Role.CLIENT, response.getRole());
+        assertEquals("Client User", response.getFullName());
+        assertFalse(response.isVerified());
+
+        // Verifikasi bahwa objek DTO UserResponse tidak memiliki field password atau passwordHash
+        boolean hasPasswordField = Arrays.stream(UserResponse.class.getDeclaredFields())
+                .anyMatch(field -> field.getName().toLowerCase().contains("password"));
+        assertFalse(hasPasswordField, "UserResponse tidak boleh memiliki field password atau passwordHash");
+    }
+
+    @Test
+    @DisplayName("getUserById dengan UUID tidak terdaftar harus melempar ResourceNotFoundException dengan pesan Pengguna tidak ditemukan")
+    void getUserById_userNotFound_throwsResourceNotFoundException() {
+        UUID userId = UUID.randomUUID();
+        when(userRepository.findById(userId)).thenReturn(Optional.empty());
+
+        ResourceNotFoundException exception = assertThrows(
+                ResourceNotFoundException.class,
+                () -> userService.getUserById(userId)
+        );
+
+        assertEquals("Pengguna tidak ditemukan", exception.getMessage());
+        verify(userRepository).findById(userId);
     }
 }

@@ -38,6 +38,20 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Menangani data yang tidak ditemukan di database (404 Not Found).
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                "Data Tidak Ditemukan",
+                ex.getMessage(),
+                Instant.now().toString()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    /**
      * Menangani data duplikat seperti email yang sudah terdaftar (409 Conflict).
      */
     @ExceptionHandler(DuplicateResourceException.class)

@@ -1,6 +1,7 @@
 package com.nexscale.api.user.service;
 
 import com.nexscale.api.common.exception.DuplicateResourceException;
+import com.nexscale.api.common.exception.ResourceNotFoundException;
 import com.nexscale.api.user.dto.RegisterRequest;
 import com.nexscale.api.user.dto.UserResponse;
 import com.nexscale.api.user.entity.User;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nexscale.api.common.exception.RoleNotAllowedException;
 import com.nexscale.api.user.entity.Role;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.UUID;
 
 
 @Service
@@ -42,5 +45,11 @@ public class UserService {
         //4.Return respon dalam bentuk DTO aman(tanpa password)
         return UserResponse.fromEntity(savedUser);
     }
-    
+
+    @Transactional(readOnly = true)
+    public UserResponse getUserById(UUID userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Pengguna tidak ditemukan"));
+        return UserResponse.fromEntity(user);
+    }
 }
