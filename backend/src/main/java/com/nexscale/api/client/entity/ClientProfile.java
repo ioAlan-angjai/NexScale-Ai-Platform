@@ -49,11 +49,17 @@ public class ClientProfile {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    // 1. Constructor tanpa argumen
+    // 1. Constructor tanpa argumen (wajib untuk JPA/Hibernate via refleksi)
     public ClientProfile() {
     }
 
-    // 2. Constructor parameter untuk inisialisasi profil baru
+    // 2. Constructor stub untuk auto-provisioning profil saat registrasi akun baru role CLIENT.
+    // Menghubungkan profil ke akun User, sedangkan field profil lainnya dibiarkan null untuk diisi nanti.
+    public ClientProfile(User user) {
+        this.user = user;
+    }
+
+    // 3. Constructor parameter penuh untuk inisialisasi lengkap atau unit test
     public ClientProfile(User user, String companyName, String businessType, String industry,
                          String description, String location, String website) {
         this.user = user;

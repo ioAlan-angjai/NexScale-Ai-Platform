@@ -129,6 +129,21 @@ public class GlobalExceptionHandler {
         }
 
         /**
+         * Menangani akses yang ditolak oleh Spring Security (403 Forbidden).
+         * Mencegah AccessDeniedException tertelan oleh generic Exception handler (500).
+         */
+        @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+        public ResponseEntity<ErrorResponse> handleAccessDenied(org.springframework.security.access.AccessDeniedException ex) {
+                ErrorResponse error = new ErrorResponse(
+                        HttpStatus.FORBIDDEN.value(),
+                        "Akses Ditolak",
+                        "Anda tidak memiliki izin untuk mengakses resource ini",
+                        Instant.now().toString()
+                );
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+        }
+
+        /**
          * Menangani kredensial login yang salah (401 Unauthorized)
          */
 

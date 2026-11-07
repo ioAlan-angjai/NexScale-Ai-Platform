@@ -63,6 +63,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/categories").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/categories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
+                        .requestMatchers("/api/clients/**").hasRole("CLIENT")
+                        .requestMatchers("/api/providers/**").hasRole("PROVIDER")
                         .anyRequest().authenticated()
                 )
                 // 5. Daftarkan filter JWT sebelum filter autentikasi standar Spring
