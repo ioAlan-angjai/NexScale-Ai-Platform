@@ -11,8 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.util.stream.Collectors;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
-
-
 import java.time.Instant;
 
 /**
@@ -22,77 +20,85 @@ import java.time.Instant;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    /**
-     * Menangani request ke endpoint yang tidak terdaftar (404 Not Found).
-     */
-    @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFound(
-            NoResourceFoundException ex, HttpServletRequest request) {
-        ErrorResponse error = new ErrorResponse(
-                HttpStatus.NOT_FOUND.value(),
-                "Endpoint tidak ditemukan: " + request.getRequestURI(),
-                request.getRequestURI(),
-                Instant.now().toString()
-        );
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
+        /**
+         * Menangani request ke endpoint yang tidak terdaftar (404 Not Found).
+         */
+        @ExceptionHandler(NoResourceFoundException.class)
+        public ResponseEntity<ErrorResponse> handleNotFound(
+                        NoResourceFoundException ex, HttpServletRequest request) {
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.NOT_FOUND.value(),
+                                "Endpoint tidak ditemukan: " + request.getRequestURI(),
+                                request.getRequestURI(),
+                                Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
 
-    /**
-     * Menangani data yang tidak ditemukan di database (404 Not Found).
-     */
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
-        ErrorResponse error = new ErrorResponse(
-                HttpStatus.NOT_FOUND.value(),
-                "Data Tidak Ditemukan",
-                ex.getMessage(),
-                Instant.now().toString()
-        );
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
+        /**
+         * Menangani data yang tidak ditemukan di database (404 Not Found).
+         */
+        @ExceptionHandler(ResourceNotFoundException.class)
+        public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.NOT_FOUND.value(),
+                                "Data Tidak Ditemukan",
+                                ex.getMessage(),
+                                Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
 
-    /**
-     * Menangani data duplikat seperti email yang sudah terdaftar (409 Conflict).
-     */
-    @ExceptionHandler(DuplicateResourceException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateResource(
-            DuplicateResourceException ex, HttpServletRequest request) {
-        ErrorResponse error = new ErrorResponse(
-                HttpStatus.CONFLICT.value(),
-                "Data Duplikat",
-                ex.getMessage(),
-                Instant.now().toString()
-        );
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }
+        /**
+         * Menangani data duplikat seperti email yang sudah terdaftar (409 Conflict).
+         */
+        @ExceptionHandler(DuplicateResourceException.class)
+        public ResponseEntity<ErrorResponse> handleDuplicateResource(
+                        DuplicateResourceException ex, HttpServletRequest request) {
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.CONFLICT.value(),
+                                "Data Duplikat",
+                                ex.getMessage(),
+                                Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+        }
 
-    /**
-     * Catch-all handler untuk exception yang tidak tertangani secara spesifik (500 Internal Server Error).
-     */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGenericException(
-            Exception ex, HttpServletRequest request) {
-        ErrorResponse error = new ErrorResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Terjadi kesalahan internal pada server",
-                request.getRequestURI(),
-                Instant.now().toString()
-        );
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-    }
+        @ExceptionHandler(BadRequestException.class)
+        public ResponseEntity<ErrorResponse> handleBadRequest(
+                        BadRequestException ex) {
+                ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                                "Permintaan tidak valid",
+                                ex.getMessage(),
+                                Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
 
-    /**
-     * Menangani input yang melanggar aturan validasi (400 Bad Request)
-     */
-    @ExceptionHandler(MethodArgumentNotValidException.class) public ResponseEntity<ErrorResponse>handleValidationException(
-        MethodArgumentNotValidException ex) {
-               String message = ex.getBindingResult().getFieldErrors().stream().map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
-               .collect(Collectors.joining("; "));
+        /**
+         * Catch-all handler untuk exception yang tidak tertangani secara spesifik (500
+         * Internal Server Error).
+         */
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<ErrorResponse> handleGenericException(
+                        Exception ex, HttpServletRequest request) {
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                                "Terjadi kesalahan internal pada server",
+                                request.getRequestURI(),
+                                Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
 
-               ErrorResponse error = new ErrorResponse(
-                HttpStatus.BAD_REQUEST.value(), "Validasi Gagal", message, Instant.now().toString());
-                return 
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        /**
+         * Menangani input yang melanggar aturan validasi (400 Bad Request)
+         */
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<ErrorResponse> handleValidationException(
+                        MethodArgumentNotValidException ex) {
+                String message = ex.getBindingResult().getFieldErrors().stream()
+                                .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+                                .collect(Collectors.joining("; "));
+
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.BAD_REQUEST.value(), "Validasi Gagal", message, Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
 
         /**
@@ -101,30 +107,30 @@ public class GlobalExceptionHandler {
          */
 
         @ExceptionHandler(HttpMessageNotReadableException.class)
-        public ResponseEntity<ErrorResponse>handleMessageNotReadable(
-                HttpMessageNotReadableException ex) {
-                ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), 
-                "Format Request Tidak Valid",
-                "Format JSON atau tipe data pada request body tidak valid",
-                
-                Instant.now().toString() );
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        public ResponseEntity<ErrorResponse> handleMessageNotReadable(
+                        HttpMessageNotReadableException ex) {
+                ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                                "Format Request Tidak Valid",
+                                "Format JSON atau tipe data pada request body tidak valid",
 
+                                Instant.now().toString());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 
         }
 
         /**
-         * Menangani pendaftaran role terlarang seperti admin secara publik (403 Forbidden)
+         * Menangani pendaftaran role terlarang seperti admin secara publik (403
+         * Forbidden)
          */
 
         @ExceptionHandler(RoleNotAllowedException.class)
-        public ResponseEntity<ErrorResponse>handleRoleNotAllowed(RoleNotAllowedException ex) {
+        public ResponseEntity<ErrorResponse> handleRoleNotAllowed(RoleNotAllowedException ex) {
                 ErrorResponse error = new ErrorResponse(
-                        HttpStatus.FORBIDDEN.value(),
-                        "Akses Ditolak",
-                        ex.getMessage(),
+                                HttpStatus.FORBIDDEN.value(),
+                                "Akses Ditolak",
+                                ex.getMessage(),
 
-                Instant.now().toString());
+                                Instant.now().toString());
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
         }
 
@@ -133,13 +139,13 @@ public class GlobalExceptionHandler {
          * Mencegah AccessDeniedException tertelan oleh generic Exception handler (500).
          */
         @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
-        public ResponseEntity<ErrorResponse> handleAccessDenied(org.springframework.security.access.AccessDeniedException ex) {
+        public ResponseEntity<ErrorResponse> handleAccessDenied(
+                        org.springframework.security.access.AccessDeniedException ex) {
                 ErrorResponse error = new ErrorResponse(
-                        HttpStatus.FORBIDDEN.value(),
-                        "Akses Ditolak",
-                        "Anda tidak memiliki izin untuk mengakses resource ini",
-                        Instant.now().toString()
-                );
+                                HttpStatus.FORBIDDEN.value(),
+                                "Akses Ditolak",
+                                "Anda tidak memiliki izin untuk mengakses resource ini",
+                                Instant.now().toString());
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
         }
 
@@ -148,13 +154,12 @@ public class GlobalExceptionHandler {
          */
 
         @ExceptionHandler(InvalidCredentialsException.class)
-        public ResponseEntity<ErrorResponse>handleInvalidCredentials(InvalidCredentialsException ex) {
+        public ResponseEntity<ErrorResponse> handleInvalidCredentials(InvalidCredentialsException ex) {
                 ErrorResponse error = new ErrorResponse(
-                    HttpStatus.UNAUTHORIZED.value(),
-                    "Autentikasi gagal",
-                    ex.getMessage(),
-                    Instant.now().toString()
-                );
+                                HttpStatus.UNAUTHORIZED.value(),
+                                "Autentikasi gagal",
+                                ex.getMessage(),
+                                Instant.now().toString());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
 
         }
